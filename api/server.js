@@ -6,11 +6,18 @@ import matchRoutes from "./routes/match.route.js";
 import messageRoutes from "./routes/message.route.js";
 import cookieParser from "cookie-parser";
 import { connectDB } from "./config/db.js";
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);

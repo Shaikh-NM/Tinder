@@ -64,7 +64,7 @@ export async function login(req, res) {
     }
 
     const user = await User.findOne({ email });
-    if (!user || !(await User.matchPassword(password))) {
+    if (!user || !(await user.matchPassword(password))) {
       return res
         .status(400)
         .json({ success: false, message: "Invalid Email or Password" });
@@ -74,7 +74,7 @@ export async function login(req, res) {
     res.cookie("jwt", token, {
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
-      sameSite: strict,
+      sameSite: "strict",
       secure: ENV_VARS.NODE_ENV === "production",
     });
 
