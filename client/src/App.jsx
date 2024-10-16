@@ -33,7 +33,7 @@ const App = () => {
           element={authUser ? <ProfilePage /> : <Navigate to={"/auth"} />}
         />
         <Route
-          path={"/chat"}
+          path={"/chat/:id"}
           element={authUser ? <ChatPage /> : <Navigate to={"/auth"} />}
         />
       </Routes>

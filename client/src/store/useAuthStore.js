@@ -26,7 +26,7 @@ export const useAuthStore = create((set) => ({
       set({ loading: true });
       const res = await axiosInstance.post("/auth/login", loginData);
       set({ authUser: res.data.user });
-      toast.success("Account Created Successfully");
+      toast.success("Logged In Successfully");
     } catch (error) {
       console.error("error in signup : ", error);
       toast.error(error.response.data.message, "Sign Up Failed");
@@ -34,20 +34,6 @@ export const useAuthStore = create((set) => ({
       set({ loading: false });
     }
   },
-
-  // login: async (loginData) => {
-  //   try {
-  //     set({ loading: true });
-  //     const res = await axiosInstance.post("/auth/login", loginData);
-  //     set({ authUser: res.data.user });
-  //     toast.success("Logged In Successfully");
-  //   } catch (error) {
-  //     console.error("error in login : ", error);
-  //     toast.error(error.response.message.data || "Failed to Login");
-  //   } finally {
-  //     set({ loading: false });
-  //   }
-  // },
 
   logout: async () => {
     try {
@@ -65,7 +51,6 @@ export const useAuthStore = create((set) => ({
   checkAuth: async () => {
     try {
       const res = await axiosInstance.get("/auth/me");
-      console.log(res);
       set({ authUser: res.data.user });
     } catch (error) {
       set({ authUser: null });
