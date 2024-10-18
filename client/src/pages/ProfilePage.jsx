@@ -31,7 +31,6 @@ const ProfilePage = () => {
       reader.readAsDataURL(file);
     }
   };
-  console.log(image);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -85,7 +84,7 @@ const ProfilePage = () => {
                     type="number"
                     required
                     value={age}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setAge(e.target.value)}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300
 										 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pink-500 focus:border-pink-500 
 										sm:text-sm"

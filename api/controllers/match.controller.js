@@ -3,7 +3,7 @@ import User from "../models/user.model.js";
 export async function swipeRight(req, res) {
   try {
     const { likedUserId } = req.params;
-    const user = await User.findById(req.user.userId);
+    const user = await User.findById(req.user._id);
     const likedUser = await User.findById(likedUserId);
     if (!likedUser) {
       return res.status(400).json({
@@ -36,7 +36,7 @@ export async function swipeRight(req, res) {
 export async function swipeLeft(req, res) {
   try {
     const { dislikedUserId } = req.params;
-    const user = await User.findById(req.user.userId);
+    const user = await User.findById(req.user._id);
     if (!user.dislikes.includes(dislikedUserId)) {
       user.dislikes.push(dislikedUserId);
       await user.save();
@@ -53,7 +53,7 @@ export async function swipeLeft(req, res) {
 
 export async function getMatches(req, res) {
   try {
-    const user = await User.findById(req.user.userId).populate(
+    const user = await User.findById(req.user._id).populate(
       "matches",
       "name image"
     );
@@ -69,7 +69,7 @@ export async function getMatches(req, res) {
 
 export async function getUserProfiles(req, res) {
   try {
-    const currentUser = await User.findById(req.user.userId);
+    const currentUser = await User.findById(req.user._id);
 
     const users = await User.find({
       $and: [
